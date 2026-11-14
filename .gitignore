@@ -1,0 +1,12 @@
+node_modules/
+dist/
+screenshots/
+danatela-pwa-site.zip
+.env
+.env.*
+!.env.example
+*private*.json
+danatela-orders*.json
+.DS_Store
+Thumbs.db
+__pycache__/
