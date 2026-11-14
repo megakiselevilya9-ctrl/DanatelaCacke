@@ -1,92 +1,66 @@
-{
-  "coworkUserFilesPath": "C:\\Users\\Ilya\\Claude",
-  "preferences": {
-    "coworkBrowserToolsEnabled": false,
-    "coworkPreferredBrowser": "built_in",
-    "launchPreviewPersistedWorkspaces": [],
-    "launchPreviewSessionScopedSessions": [],
-    "coworkLegacyRootGrantsPruned": true,
-    "coworkScheduledTasksEnabled": false,
-    "orgWorkAcrossAppsDisabled": true,
-    "ccdScheduledTasksEnabled": false,
-    "httpCacheZstdLatched": true,
-    "bypassPermissionsGateByAccount": {
-      "f91fde6a-402d-40b0-8e0e-8e2a5795f233": false
-    },
-    "coworkWebSearchEnabled": true,
-    "coworkModelAutoFallbackByAccount": {
-      "f91fde6a-402d-40b0-8e0e-8e2a5795f233": true
-    },
-    "remoteToolsDeviceName": "desktop-qorfq0j",
-    "epitaxyPrefs": {
-      "starred-local-code-sessions": [],
-      "starred-cowork-spaces": [],
-      "starred-session-groups": [],
-      "starred-local-routines": [],
-      "dframe-group-scopes": {},
-      "dframe-local-slice": {
-        "pinnedOrder": [],
-        "homeProjectsPinnedOrder": []
-      },
-      "dframe-code-sections": {
-        "f91fde6a-402d-40b0-8e0e-8e2a5795f233/e6a8f6c2-c53e-4e96-8ccc-43eed9591f9e": {
-          "sections": [
-            {
-              "id": "pinned",
-              "kind": "pinned",
-              "v": 2,
-              "name": "",
-              "order": 0,
-              "sortBy": "recency",
-              "ascending": false,
-              "show": {
-                "metadata": false,
-                "emptyGroups": false,
-                "sideChats": false,
-                "slack": true
-              },
-              "collapsed": false,
-              "shown": true
-            },
-            {
-              "id": "routines",
-              "kind": "routines",
-              "v": 2,
-              "name": "",
-              "order": 1,
-              "sortBy": "recency",
-              "ascending": false,
-              "show": {
-                "metadata": false,
-                "emptyGroups": false,
-                "sideChats": false,
-                "slack": true
-              },
-              "collapsed": true,
-              "shown": false
-            },
-            {
-              "id": "sessions",
-              "kind": "sessions",
-              "v": 2,
-              "name": "",
-              "order": 2,
-              "sortBy": "recency",
-              "ascending": false,
-              "show": {
-                "metadata": false,
-                "emptyGroups": false,
-                "sideChats": false,
-                "slack": true
-              },
-              "collapsed": false,
-              "shown": true
-            }
-          ],
-          "migratedFrom": 1,
-          "prefsSeeded": true
-        }
-      }
-    }
-  }
-}
+name: Test and deploy Danatela PWA
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: danatela-pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    steps:
+      - name: Download repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Build application and icons
+        run: python build.py
+
+      - name: Install test dependencies
+        run: npm install --ignore-scripts
+
+      - name: Install Chromium
+        run: npx playwright install --with-deps chromium
+
+      - name: Test application
+        run: npm test
+
+      - name: Prepare website
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+
+    permissions:
+      pages: write
+      id-token: write
+
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    steps:
+      - name: Publish website
+        id: deployment
+        uses: actions/deploy-pages@v4
