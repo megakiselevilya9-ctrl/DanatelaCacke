@@ -2,7 +2,7 @@
 <html lang="ru">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover,interactive-widget=resizes-content">
 <meta name="theme-color" content="#fffaf5">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="Danatela">
@@ -21,6 +21,25 @@
 <style>
 .pwa-bar{display:flex;flex-wrap:wrap;gap:14px;align-items:center;justify-content:space-between;background:#f2f5ed;border:1px solid #dee5d4;border-radius:14px;padding:13px 17px;margin:-8px 0 24px}.pwa-bar strong{display:block;font-size:12px;margin-bottom:4px}.pwa-bar small{font-size:11px;color:#647054}.pwa-bar .btn{min-height:38px;padding:10px 15px}.pwa-update{background:#fff0d9;border-color:#edd7ad}.pwa-help p{font-size:14px;line-height:1.8}.pwa-status-line{font-size:11px;color:var(--muted);margin-top:15px;line-height:1.7}.order-card h3,.choice strong,.choice small{overflow-wrap:anywhere}.admin-tabs{flex-wrap:wrap}.admin-tabs button{min-height:44px}.admin-group input[type=color]{height:46px;padding:5px}.summary-line span:first-child{overflow-wrap:anywhere}header{padding-top:env(safe-area-inset-top);height:calc(90px + env(safe-area-inset-top))}@media(max-width:720px){header{height:calc(76px + env(safe-area-inset-top))}.pwa-bar{margin:-2px 0 20px;padding:13px}.pwa-bar small{font-size:10px}.pwa-bar .btn{font-size:11px}.admin-tabs button{padding:10px 13px}}
 </style>
+<style id="app-shell-styles">
+/* Fixed viewport shell: only the active panel, preview or dialog may scroll. */
+html{height:100%;width:100%;overflow:hidden;overscroll-behavior:none;-webkit-text-size-adjust:100%;touch-action:pan-y}
+body{position:fixed;inset:auto 0 auto 0;top:var(--app-top,0px);height:var(--app-height,100dvh);max-height:var(--app-height,100dvh);width:100%;overflow:hidden;overscroll-behavior:none;display:grid;grid-template-rows:auto minmax(0,1fr) auto;touch-action:pan-y}
+header{width:100%;flex-shrink:0}.page{width:100%;margin:0 auto;min-height:0;max-height:100%;padding:22px 32px 16px;overflow:hidden;display:flex;flex-direction:column;gap:0}
+.intro{flex-shrink:0;margin-bottom:16px}.intro h1{font-size:clamp(28px,3.1vw,42px);margin-bottom:8px}.intro h1 br{display:none}.intro p{font-size:12px;max-width:650px}.handwritten{font-size:14px;padding-bottom:0}
+.pwa-bar{flex-shrink:0;margin:0 0 14px;padding:10px 14px;gap:8px}.workspace{flex:1;min-height:0;overflow:hidden;align-items:stretch;gap:28px}.builder{min-height:0;overflow:hidden;display:grid;grid-template-rows:auto minmax(0,1fr) auto auto}
+.steps{margin:0 0 12px;flex-shrink:0}.step{min-width:0;min-height:44px}.step:disabled{opacity:.48;cursor:not-allowed}.step.complete span{background:var(--sage);color:#39452d}
+.panel{min-height:0;max-height:100%;overflow-x:hidden;overflow-y:auto;overscroll-behavior-y:contain;-webkit-overflow-scrolling:touch;touch-action:pan-y;scroll-padding:20px}
+.step-help{font-size:11px;color:var(--muted);line-height:1.5;min-height:17px;margin:8px 0 0}.builder-nav{margin-top:9px;flex-shrink:0}.builder-nav .btn{max-width:64%;min-height:44px}.back-btn{min-height:44px}.stepCaption{min-width:0}
+.preview-column{position:static;min-height:0;max-height:100%;overflow-x:hidden;overflow-y:auto;overscroll-behavior-y:contain;-webkit-overflow-scrolling:touch;scroll-padding:16px}.cake-stage{min-height:220px;border-radius:65px 65px 20px 20px;padding-top:15px}.cake-svg{height:205px}.stage-note{font-size:9px}.order-slip{padding:20px;margin-bottom:2px}footer{display:none}
+.grid2{grid-template-columns:repeat(2,minmax(0,1fr))}.grid3{grid-template-columns:repeat(3,minmax(0,1fr))}.field,.grid2>*{min-width:0;max-width:100%}.field input,.field textarea,.field select{display:block;min-width:0;max-width:100%;width:100%;box-sizing:border-box;font-size:16px;line-height:1.35}.field input[type=date]{appearance:none;-webkit-appearance:none;min-width:0;max-width:100%;width:100%;height:48px;text-align:left}.field input::-webkit-date-and-time-value{text-align:left;min-width:0}.field input::-webkit-datetime-edit{min-width:0;padding:0}.field input[type=file]{overflow:hidden;font-size:16px}select,input,textarea{font-size:16px}button,a{touch-action:manipulation}
+.modal{--dialog-gap:16px;position:fixed;inset:auto;top:calc(var(--app-top,0px) + var(--dialog-gap));left:50%;transform:translateX(-50%);margin:0;width:min(720px,calc(100% - 32px));max-width:calc(100% - 32px);min-width:0;max-height:calc(var(--app-height,100dvh) - 2 * var(--dialog-gap));overflow-x:hidden;overflow-y:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch;touch-action:pan-y;scroll-padding:80px 0 24px}
+.modal-inner{min-width:0;padding:24px}.modal-header{position:sticky;top:-1px;z-index:2;background:var(--milk);padding:6px 0 12px;margin-bottom:10px;align-items:flex-start}.modal-header h2{min-width:0;line-height:1.15}.modal .close{width:40px;height:40px;min-width:40px;min-height:40px}.modal textarea{resize:vertical;max-height:180px}.confirm-label span{min-width:0}.modal .toast{bottom:18px;max-width:calc(100vw - 48px)}
+#previewDialog .preview-column{display:block;overflow:visible;max-height:none;width:100%}#previewDialog .cake-stage{margin-top:5px}#previewDialog .order-slip{margin-bottom:4px}.mobile-total{background:none;padding:2px 0;text-align:left;min-width:0;color:var(--ink)}.mobile-total small{display:block}.mobile-total:focus-visible{outline-offset:2px}
+.keyboard-open .intro,.keyboard-open .pwa-bar{display:none}.keyboard-open .page{padding-top:8px}
+@media(max-width:720px){header{height:calc(62px + env(safe-area-inset-top));padding-left:16px;padding-right:16px}.brand-name{font-size:23px}.brand-mark{width:32px;height:32px}.brand-sub{font-size:8px}.page{padding:12px 14px 8px}.intro{margin-bottom:10px}.intro h1{font-size:25px;line-height:1.1;letter-spacing:-.7px;margin:0}.intro p,.handwritten{display:none}.pwa-bar{margin:0 0 9px;padding:8px 11px;gap:5px}.pwa-bar strong{font-size:10px;margin-bottom:2px}.pwa-bar small{font-size:9px}.pwa-bar .btn{font-size:10px;min-height:34px;padding:8px 11px}.workspace{display:flex;flex-direction:row;gap:0}.builder{flex:1;width:100%;height:100%;min-height:0}.workspace>.preview-column{display:none}.steps{gap:2px;margin-bottom:9px}.step{font-size:10px;gap:4px;padding:9px 0}.step span{width:19px;height:19px}.panel{padding:18px;border-radius:18px}.panel h2{font-size:25px}.builder-nav{margin-top:5px}.builder-nav .btn{min-height:41px;padding:10px 15px}.step-help{font-size:10px;margin-top:6px;min-height:15px}.mobile-bar{position:static;inset:auto;display:flex;width:100%;gap:12px;padding:9px 16px calc(9px + env(safe-area-inset-bottom));background:var(--milk);border-top:1px solid var(--line);min-height:64px;z-index:4}.mobile-bar .btn{min-height:44px;padding:11px 22px}.mobile-bar small{font-size:9px}.mobile-bar strong{font-size:25px}#orderForm>.grid2{grid-template-columns:minmax(0,1fr);gap:0}.modal{--dialog-gap:10px;width:calc(100% - 24px);max-width:calc(100% - 24px);border-radius:20px}.modal-inner{padding:17px}.modal-header h2{font-size:27px}.field{margin-top:16px}.field input,.field select{min-height:48px}.field textarea{min-height:95px}#orderForm{padding-bottom:8px}.modal .grid2{gap:10px}.modal .toast{bottom:16px}.order-slip .btn{min-height:46px}}
+@media(max-height:600px){.intro,.pwa-bar:not(.pwa-update){display:none}.page{padding-top:8px}.modal{--dialog-gap:6px}header{height:calc(50px + env(safe-area-inset-top))}.brand-sub{display:none}.steps{margin-bottom:5px}.mobile-bar{padding-top:6px;padding-bottom:calc(6px + env(safe-area-inset-bottom));min-height:54px}.mobile-bar .btn{min-height:40px}.step-help{margin-top:3px}}
+</style>
 </head>
 <body>
 <header>
@@ -35,9 +54,10 @@
 <section class="builder" aria-label="Конструктор торта">
 <nav class="steps" aria-label="Шаги конструктора"><button class="step active" data-step="0"><span>1</span>Размер</button><button class="step" data-step="1"><span>2</span>Начинка</button><button class="step" data-step="2"><span>3</span>Дизайн</button><button class="step" data-step="3"><span>4</span>Детали</button></nav>
 <div class="panel" id="builderPanel" tabindex="-1"></div>
+<p class="step-help" id="stepHelp" role="status" aria-live="polite"></p>
 <div class="builder-nav"><button class="back-btn" id="backStep">Назад</button><span class="fine-label" id="stepCaption">Шаг 1 из 4</span><button class="btn btn-primary" id="nextStep">Выбрать начинку</button></div>
 </section>
-<aside class="preview-column" aria-label="Ваш торт и расчёт">
+<aside class="preview-column" id="cakePreview" aria-label="Ваш торт и расчёт">
 <div class="cake-stage"><div class="stage-caption">Ваш маленький шедевр</div>
 <svg class="cake-svg" viewBox="0 0 420 285" role="img" aria-label="Условная иллюстрация торта, не точная визуализация заказа" xmlns="http://www.w3.org/2000/svg">
 <defs><radialGradient id="ground"><stop stop-color="#ac7d8d" stop-opacity=".2"/><stop offset="1" stop-color="#ac7d8d" stop-opacity="0"/></radialGradient><linearGradient id="icingShade" x1="0" x2="1"><stop stop-color="#fff" stop-opacity=".2"/><stop offset=".65" stop-color="#fff" stop-opacity="0"/><stop offset="1" stop-color="#613047" stop-opacity=".1"/></linearGradient><pattern id="cakeGrain" width="8" height="8" patternUnits="userSpaceOnUse"><circle cx="2" cy="3" r=".55" fill="#fff" opacity=".4"/></pattern></defs>
@@ -50,9 +70,10 @@
 </div>
 <footer><span>Danatela · торты для особенных моментов</span><span>PWA · каталог и заявки без сохранения</span></footer>
 </main>
-<div class="mobile-bar"><div><small>Предварительная стоимость</small><strong id="mobileTotal"></strong></div><button class="btn btn-primary" id="mobileNext">Далее</button></div>
+<div class="mobile-bar"><button type="button" class="mobile-total" id="openPreview" aria-haspopup="dialog" aria-controls="previewDialog"><small>Ваш торт и расчёт · открыть</small><strong id="mobileTotal"></strong></button><button class="btn btn-primary" id="mobileNext">Далее</button></div>
+<dialog class="modal" id="previewDialog" aria-labelledby="previewTitle"><div class="modal-inner"><div class="modal-header"><h2 id="previewTitle">Ваш торт</h2><button class="close" data-close="previewDialog" aria-label="Закрыть расчёт">×</button></div><div id="previewMount"></div></div></dialog>
 <dialog class="modal" id="adminDialog" aria-labelledby="adminTitle"><div class="modal-inner"><div class="modal-header"><h2 id="adminTitle">Кабинет кондитера</h2><button class="close" data-close="adminDialog" aria-label="Закрыть кабинет">×</button></div><p class="admin-intro">Настройте цены — конструктор пересчитает стоимость. Здесь же появятся заявки из этой локальной сессии.</p><div class="notice">Демонстрационная админка без пароля. Начинки, цены и заявки действуют только в этой сессии: после обновления или перезапуска вернутся тестовые данные. Изменения не передаются другим клиентам.</div><div class="admin-tabs"><button id="pricesTab" class="active">Цены</button><button id="fillingsTab">Начинки</button><button id="ordersTab">Заявки <span id="orderCount">0</span></button></div><div id="adminContent"></div></div></dialog>
-<dialog class="modal" id="checkoutDialog" aria-labelledby="checkoutTitle"><div class="modal-inner"><div class="modal-header"><h2 id="checkoutTitle">Расскажите о празднике</h2><button class="close" data-close="checkoutDialog" aria-label="Закрыть оформление">×</button></div><div id="checkoutSummary" class="read-only"></div><form id="orderForm"><div class="grid2"><label class="field">Как вас зовут<input name="name" required maxlength="80" autocomplete="name" placeholder="Ваше имя"></label><label class="field">Телефон<input name="phone" type="tel" required maxlength="30" autocomplete="tel" placeholder="+7 999 123-45-67"></label></div><div class="grid2"><label class="field">Дата праздника<input name="date" type="date" required></label><label class="field">Страница VK, если есть<input name="vk" maxlength="160" placeholder="Ссылка или @имя"></label></div><label class="field">Пожелания к заказу<textarea name="comment" maxlength="1500" placeholder="Повод, аллергии, пожелания по времени…"></textarea></label><label class="confirm-label"><input type="checkbox" name="ack" required><span>Понимаю, что это локальная заявка: она не отправится кондитеру автоматически. Для реального заказа скопирую сообщение и отправлю его вручную в VK.</span></label><p class="error" id="orderError" role="alert"></p><button class="btn btn-primary btn-wide" type="submit">Подготовить заявку</button><p class="small-print">Данные остаются в этой вкладке. Это не подтверждение бронирования даты. Для людей с пищевой аллергией состав нужно уточнить у кондитера.</p></form></div></dialog>
+<dialog class="modal" id="checkoutDialog" aria-labelledby="checkoutTitle"><div class="modal-inner"><div class="modal-header"><h2 id="checkoutTitle">Расскажите о празднике</h2><button class="close" data-close="checkoutDialog" aria-label="Закрыть оформление">×</button></div><div id="checkoutSummary" class="read-only"></div><form id="orderForm"><div class="grid2"><label class="field">Как вас зовут<input name="name" required maxlength="80" autocomplete="name" placeholder="Ваше имя"></label><label class="field">Телефон<input name="phone" type="tel" required maxlength="30" autocomplete="tel" placeholder="+7 999 123-45-67"></label></div><div class="grid2"><label class="field">Дата праздника<input name="date" type="date" required></label><label class="field">Страница VK, если есть<input name="vk" type="text" inputmode="url" autocapitalize="off" autocorrect="off" spellcheck="false" maxlength="160" placeholder="Ссылка на профиль или @имя"></label></div><label class="field">Пожелания к заказу<textarea name="comment" maxlength="1500" placeholder="Повод, аллергии, пожелания по времени…"></textarea></label><label class="confirm-label"><input type="checkbox" name="ack" required><span>Понимаю, что это локальная заявка: она не отправится кондитеру автоматически. Для реального заказа скопирую сообщение и отправлю его вручную в VK.</span></label><p class="error" id="orderError" role="alert"></p><button class="btn btn-primary btn-wide" type="submit">Подготовить заявку</button><p class="small-print">Данные остаются в этой вкладке. Это не подтверждение бронирования даты. Для людей с пищевой аллергией состав нужно уточнить у кондитера.</p></form></div></dialog>
 <dialog class="modal" id="vkDialog" aria-labelledby="vkTitle"><div class="modal-inner"><div class="modal-header"><h2 id="vkTitle">Заявка готова</h2><button class="close" data-close="vkDialog" aria-label="Закрыть заявку">×</button></div><div class="success-stamp" aria-hidden="true">✓</div><div class="thank-title">Осталось познакомиться</div><p class="hint">Заявка добавлена в локальный кабинет. Скопируйте текст и отправьте его кондитеру на странице Danatela.</p><div class="vk-preview"><span class="vk-icon" aria-hidden="true">VK</span><div><strong>Danatela · danatela_cake</strong><small>Предпросмотр сообщения, не настоящая переписка</small></div></div><div class="vk-message" id="vkMessage" tabindex="0"></div><div class="inline-flex"><button class="btn btn-primary" id="copyMessage">Скопировать сообщение</button><a class="btn btn-outline" href="https://vk.ru/danatela_cake" target="_blank" rel="noopener noreferrer">Открыть VK</a><button class="btn btn-soft" id="downloadMessage">Скачать текст</button></div><p class="small-print">Автоматической отправки нет. Откройте сообщения сообщества и вставьте текст. Если добавляли референс, приложите его отдельно.</p></div></dialog>
 <dialog class="modal" id="installDialog" aria-labelledby="installTitle"><div class="modal-inner pwa-help"><div class="modal-header"><h2 id="installTitle">Danatela на главном экране</h2><button class="close" data-close="installDialog" aria-label="Закрыть инструкцию">×</button></div><div id="installInstructions"></div><p class="notice">Офлайн сохраняются только файлы приложения. Добавленные начинки, цены и заявки не сохраняются и не синхронизируются между устройствами.</p><p id="installDetails" class="pwa-status-line"></p></div></dialog>
 <div class="toast hidden" id="toast" role="status"></div>
@@ -86,6 +107,35 @@ let state = {step:0,weight:2,shape:'round',filling:'strawberry',design:'vintage'
 let orders = [], lastOrder = null, checkoutDraft = null, adminTab = 'prices', toastTimer;
 let adminUnsaved = false, referenceGeneration = 0, editingFillingId = null, fillingSequence = 0;
 const initialSelection = clone(state);
+// Values are illustrative defaults until the customer explicitly picks a card.
+let stepChoices = {shape:false,filling:false,design:false};
+const REQUIRED_STEPS = ['shape','filling','design'];
+function firstIncompleteStep(){
+ const valid={shape:SHAPES.some(s=>s.id===state.shape)&&Number.isFinite(state.weight)&&state.weight>=1.5&&state.weight<=6,filling:FILLINGS.some(f=>f.id===state.filling),design:DESIGNS.some(d=>d.id===state.design)};
+ const missing=REQUIRED_STEPS.findIndex(key=>!stepChoices[key]||!valid[key]);
+ return missing===-1?3:missing;
+}
+function stepIsUnlocked(index){return Number.isInteger(index)&&index>=0&&index<=3&&index<=firstIncompleteStep();}
+function canOpenCheckout(){return firstIncompleteStep()===3&&state.step===3;}
+function updateStepAccess(){
+ const first=firstIncompleteStep();
+ document.querySelectorAll('[data-step]').forEach(b=>{const index=Number(b.dataset.step);b.disabled=!stepIsUnlocked(index);b.classList.toggle('complete',index<3&&Boolean(stepChoices[REQUIRED_STEPS[index]])&&index<first);b.setAttribute('aria-disabled',String(b.disabled));});
+ const ready=state.step===3?first===3:Boolean(stepChoices[REQUIRED_STEPS[state.step]])&&state.step<=first;
+ $('nextStep').disabled=!ready;$('mobileNext').disabled=!ready;$('checkout').disabled=!canOpenCheckout();
+ $('nextStep').setAttribute('aria-describedby','stepHelp');$('mobileNext').setAttribute('aria-describedby','stepHelp');
+ const prompts=['Нажмите на форму торта и выберите вес.','Нажмите на понравившуюся начинку.','Нажмите на вариант дизайна.','Добавьте детали по желанию, затем оформите заявку.'];
+ $('stepHelp').textContent=ready&&state.step<3?'Выбор принят. Можно перейти к следующему шагу.':prompts[state.step];
+ document.querySelector('.slip-note').textContent=first===3?'Точную стоимость и дату подтвердит кондитер.':'Пока показан пример расчёта. Сначала выберите форму, начинку и дизайн.';
+}
+// iOS keyboard can shrink/move the visual viewport independently of the layout viewport.
+(()=>{
+ const viewport=window.visualViewport;let frame=0;
+ function sync(){frame=0;const height=Math.floor(viewport?.height||window.innerHeight),top=Math.max(0,viewport?.offsetTop||0);document.documentElement.style.setProperty('--app-height',height+'px');document.documentElement.style.setProperty('--app-top',top+'px');document.body.classList.toggle('keyboard-open',/^(INPUT|TEXTAREA|SELECT)$/.test(document.activeElement?.tagName||'')&&height<window.innerHeight*.8);}
+ const schedule=()=>{if(!frame)frame=requestAnimationFrame(sync);};
+ window.addEventListener('resize',schedule);window.addEventListener('orientationchange',schedule);viewport?.addEventListener('resize',schedule);viewport?.addEventListener('scroll',schedule);document.addEventListener('focusin',schedule);document.addEventListener('focusout',schedule);
+ for(const name of ['gesturestart','gesturechange'])document.addEventListener(name,e=>e.preventDefault(),{passive:false});
+ sync();
+})();
 
 // The price is an integer ruble amount. Design, shape and extras are fixed per cake.
 function calculate(selection, catalog) {
@@ -111,15 +161,16 @@ function renderBuilder() {
  const focused=panel.contains(document.activeElement)?document.activeElement:null;
  const focusId=focused?.id;
  const focusData=focused?Object.entries(focused.dataset).find(([key])=>['shape','filling','design','color','delivery','weightDelta'].includes(key)):null;
- if(state.step===0) panel.innerHTML=`<div class="panel-head"><h2>Для какой компании?</h2><span class="illustration-label">Один ярус</span></div><p class="hint">Выберите форму и вес. Одна порция — примерно 150 г.</p><span class="section-label">Форма торта</span><div class="grid2">${SHAPES.map(s=>option('', 'shape',s.id,state.shape===s.id,`<div class="shape">${s.id==='round'?'<div class="shape-round"></div>':'<div class="shape-heart">♥</div>'}</div><strong>${s.name}</strong><small>${s.id==='round'?'Классика для любого повода':'Когда хочется сказать о любви'}</small><span class="choice-price">${prices.shapes[s.id]?'+'+money(prices.shapes[s.id]):'Без доплаты'}</span>`)).join('')}</div><label class="section-label" for="weightRange">Вес торта</label><div class="weight-row"><span class="weight-value" id="weightValue">${number(state.weight)} <small>кг</small></span><div class="counter"><button type="button" data-weight-delta="-0.5" aria-label="Уменьшить вес" ${state.weight<=1.5?'disabled':''}>−</button><button type="button" data-weight-delta="0.5" aria-label="Увеличить вес" ${state.weight>=6?'disabled':''}>+</button></div></div><input class="range" id="weightRange" type="range" min="1.5" max="6" step="0.5" value="${state.weight}" aria-valuetext="${number(state.weight)} кг"><div class="range-labels"><span>1,5 кг</span><span>6 кг</span></div><div class="portion-note" id="portionNote">Примерно ${portions(state.weight)} порций · ориентировочный диаметр ${diameter(state.weight)} см.<br>Высоту и итоговый размер уточнит кондитер.</div>`;
- if(state.step===1) panel.innerHTML=`<h2>Самое вкусное внутри</h2><p class="hint">Начинка добавляется к базовой стоимости ${money(prices.base)} за кг.</p><div class="grid2">${FILLINGS.map(f=>option('', 'filling',f.id,state.filling===f.id,`<div class="swatch"><div class="cake-slice" style="--biscuit:${f.biscuit};--cream:${f.cream}"></div></div><strong>${escapeHtml(f.name)}</strong><small>${escapeHtml(f.description)}</small><span class="choice-price">${prices.fillings[f.id]?'+'+money(prices.fillings[f.id])+' / кг':'Без доплаты'}</span>`)).join('')}</div><p class="hint" style="margin-top:18px"><strong>Аллергены:</strong> ${escapeHtml(FILLINGS.find(f=>f.id===state.filling).allergens)} Состав тестовый, подтвердите его у кондитера.</p>`;
- if(state.step===2) panel.innerHTML=`<h2>А снаружи — настроение</h2><p class="hint">Выберите основу дизайна. Сложный индивидуальный декор оценивается отдельно.</p><div class="grid2">${DESIGNS.map(d=>option('', 'design',d.id,state.design===d.id,`<div class="design-art"><div class="mini-cake ${d.art}"></div></div><strong>${d.name}</strong><small>${d.description}</small><span class="choice-price">${prices.designs[d.id]?'+'+money(prices.designs[d.id]):'Включён в стоимость'}</span>`)).join('')}</div><span class="section-label">Цвет покрытия</span><div class="chip-row">${COLORS.map(c=>`<button type="button" class="color-button ${state.color===c.id?'selected':''}" data-color="${c.id}" aria-pressed="${state.color===c.id}" aria-label="${c.name}" title="${c.name}" style="--swatch:${c.side}"></button>`).join('')}</div><p class="color-label">${COLORS.find(c=>c.id===state.color).name} · без доплаты</p>`;
+ if(state.step===0) panel.innerHTML=`<div class="panel-head"><h2>Для какой компании?</h2><span class="illustration-label">Один ярус</span></div><p class="hint">Выберите форму и вес. Одна порция — примерно 150 г.</p><span class="section-label">Форма торта</span><div class="grid2">${SHAPES.map(s=>option('', 'shape',s.id,stepChoices.shape&&state.shape===s.id,`<div class="shape">${s.id==='round'?'<div class="shape-round"></div>':'<div class="shape-heart">♥</div>'}</div><strong>${s.name}</strong><small>${s.id==='round'?'Классика для любого повода':'Когда хочется сказать о любви'}</small><span class="choice-price">${prices.shapes[s.id]?'+'+money(prices.shapes[s.id]):'Без доплаты'}</span>`)).join('')}</div><label class="section-label" for="weightRange">Вес торта</label><div class="weight-row"><span class="weight-value" id="weightValue">${number(state.weight)} <small>кг</small></span><div class="counter"><button type="button" data-weight-delta="-0.5" aria-label="Уменьшить вес" ${state.weight<=1.5?'disabled':''}>−</button><button type="button" data-weight-delta="0.5" aria-label="Увеличить вес" ${state.weight>=6?'disabled':''}>+</button></div></div><input class="range" id="weightRange" type="range" min="1.5" max="6" step="0.5" value="${state.weight}" aria-valuetext="${number(state.weight)} кг"><div class="range-labels"><span>1,5 кг</span><span>6 кг</span></div><div class="portion-note" id="portionNote">Примерно ${portions(state.weight)} порций · ориентировочный диаметр ${diameter(state.weight)} см.<br>Высоту и итоговый размер уточнит кондитер.</div>`;
+ if(state.step===1) panel.innerHTML=`<h2>Самое вкусное внутри</h2><p class="hint">Начинка добавляется к базовой стоимости ${money(prices.base)} за кг.</p><div class="grid2">${FILLINGS.map(f=>option('', 'filling',f.id,stepChoices.filling&&state.filling===f.id,`<div class="swatch"><div class="cake-slice" style="--biscuit:${f.biscuit};--cream:${f.cream}"></div></div><strong>${escapeHtml(f.name)}</strong><small>${escapeHtml(f.description)}</small><span class="choice-price">${prices.fillings[f.id]?'+'+money(prices.fillings[f.id])+' / кг':'Без доплаты'}</span>`)).join('')}</div><p class="hint" style="margin-top:18px"><strong>Аллергены:</strong> ${escapeHtml(FILLINGS.find(f=>f.id===state.filling).allergens)} Состав тестовый, подтвердите его у кондитера.</p>`;
+ if(state.step===2) panel.innerHTML=`<h2>А снаружи — настроение</h2><p class="hint">Выберите основу дизайна. Сложный индивидуальный декор оценивается отдельно.</p><div class="grid2">${DESIGNS.map(d=>option('', 'design',d.id,stepChoices.design&&state.design===d.id,`<div class="design-art"><div class="mini-cake ${d.art}"></div></div><strong>${d.name}</strong><small>${d.description}</small><span class="choice-price">${prices.designs[d.id]?'+'+money(prices.designs[d.id]):'Включён в стоимость'}</span>`)).join('')}</div><span class="section-label">Цвет покрытия</span><div class="chip-row">${COLORS.map(c=>`<button type="button" class="color-button ${state.color===c.id?'selected':''}" data-color="${c.id}" aria-pressed="${state.color===c.id}" aria-label="${c.name}" title="${c.name}" style="--swatch:${c.side}"></button>`).join('')}</div><p class="color-label">${COLORS.find(c=>c.id===state.color).name} · без доплаты</p>`;
  if(state.step===3) panel.innerHTML=`<h2>Последние штрихи</h2><p class="hint">Добавьте надпись, референс и маленькие детали праздника.</p><label class="field">Надпись на торте · до 40 символов<input id="inscription" maxlength="40" value="${escapeHtml(state.inscription)}" placeholder="Например: С днём рождения!"></label><span class="section-label">Дополнения</span><div class="extras">${EXTRAS.map(e=>`<label class="extra"><input type="checkbox" data-extra="${e.id}" ${state.extras.includes(e.id)?'checked':''}><span class="extra-name">${e.name}</span><span class="extra-cost">+${money(prices.extras[e.id])}</span></label>`).join('')}</div><label class="field">Фото-референс · JPG, PNG или WebP до 5 МБ<input id="referenceFile" type="file" accept="image/jpeg,image/png,image/webp"></label><div id="referencePreview">${referenceMarkup()}</div><span class="section-label">Как получить торт?</span><div class="grid2">${option('','delivery','pickup',state.delivery==='pickup','<strong>Самовывоз</strong><small>Место согласуем в VK</small><span class="choice-price">Бесплатно</span>')}${option('','delivery','courier',state.delivery==='courier',`<strong>Доставка</strong><small>Зона и время — по согласованию</small><span class="choice-price">+${money(prices.delivery)}</span>`)}</div>${state.delivery==='courier'?`<label class="field">Адрес доставки<input id="deliveryAddress" maxlength="250" value="${escapeHtml(state.address)}" autocomplete="street-address" placeholder="Город, улица, дом"></label><p class="hint" style="margin-top:9px">Стоимость доставки тестовая, реальный тариф уточнит кондитер.</p>`:''}`;
  $('backStep').disabled=state.step===0;
  $('stepCaption').textContent=`Шаг ${state.step+1} из 4`;
  $('nextStep').textContent=['Выбрать начинку','Выбрать дизайн','Добавить детали','Оформить заявку'][state.step];
  $('mobileNext').textContent=state.step===3?'Оформить':'Далее';
  renderSummary();
+ updateStepAccess();
  if(focusId&&$(focusId))$(focusId).focus({preventScroll:true});
  else if(focusData){const [key,value]=focusData;const replacement=[...panel.querySelectorAll('button')].find(b=>b.dataset[key]===value&&!b.disabled);if(replacement)replacement.focus({preventScroll:true});}
 }
@@ -151,11 +202,20 @@ function drawCake() {
  $('cakeTopper').removeAttribute('hidden');
  if(state.extras.includes('candles')) {node('path',{d:'M252 108v-22 M264 109V87 M276 111V89',stroke:'#fff5d7','stroke-width':4});for(const [x,y] of [[252,82],[264,83],[276,85]])node('ellipse',{cx:x,cy:y,rx:2,ry:4,fill:'#cc934a'});}
 }
-function goStep(index,focus=true) {state.step=Math.max(0,Math.min(3,index));renderBuilder();if(focus){$('builderPanel').focus({preventScroll:true});$('builderPanel').scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth',block:'nearest'});}}
+function goStep(index,focus=true){
+ if(!stepIsUnlocked(index)){notify('Сначала выберите форму, начинку и дизайн по порядку.');return false;}
+ state.step=index;renderBuilder();$('builderPanel').scrollTop=0;
+ if(focus)$('builderPanel').focus({preventScroll:true});
+ return true;
+}
 function updateWeight(value,rerender=false) {state.weight=Math.max(1.5,Math.min(6,Math.round(value*2)/2));if(rerender){renderBuilder();return;}$('weightValue').innerHTML=number(state.weight)+' <small>кг</small>';$('weightRange').setAttribute('aria-valuetext',number(state.weight)+' кг');$('portionNote').innerHTML=`Примерно ${portions(state.weight)} порций · ориентировочный диаметр ${diameter(state.weight)} см.<br>Высоту и итоговый размер уточнит кондитер.`;document.querySelector('[data-weight-delta="-0.5"]').disabled=state.weight<=1.5;document.querySelector('[data-weight-delta="0.5"]').disabled=state.weight>=6;renderSummary();}
 $('builderPanel').addEventListener('click',e=>{
  const b=e.target.closest('button');if(!b)return;
- for(const key of ['shape','filling','design','color','delivery'])if(b.dataset[key]){state[key]=b.dataset[key];renderBuilder();return;}
+ for(const key of ['shape','filling','design','color','delivery'])if(b.dataset[key]){
+  const values={shape:SHAPES,filling:FILLINGS,design:DESIGNS,color:COLORS,delivery:[{id:'pickup'},{id:'courier'}]};
+  if(!values[key].some(item=>item.id===b.dataset[key]))return;
+  state[key]=b.dataset[key];if(REQUIRED_STEPS.includes(key))stepChoices[key]=true;renderBuilder();return;
+ }
  if(b.dataset.weightDelta){updateWeight(state.weight+Number(b.dataset.weightDelta),true);return;}
  if(b.id==='removeReference'){referenceGeneration++;URL.revokeObjectURL(state.reference.url);state.reference=null;renderBuilder();$('referenceFile')?.focus({preventScroll:true});}
 });
@@ -179,17 +239,23 @@ $('backStep').onclick=()=>goStep(state.step-1);
 $('nextStep').onclick=()=>state.step===3?openCheckout():goStep(state.step+1);
 $('mobileNext').onclick=()=>state.step===3?openCheckout():goStep(state.step+1);
 $('checkout').onclick=openCheckout;
+const previewHome=$('cakePreview').parentElement;
+$('openPreview').onclick=()=>{if(!$('previewDialog').open){$('previewMount').append($('cakePreview'));$('previewDialog').showModal();$('previewDialog').scrollTop=0;}};
+$('previewDialog').addEventListener('close',()=>{previewHome.append($('cakePreview'));});
 document.querySelectorAll('[data-close]').forEach(b=>b.addEventListener('click',()=>{if(b.dataset.close==='adminDialog'){if(!canLeavePrices())return;adminUnsaved=false;}$(b.dataset.close).close();}));
 $('adminDialog').addEventListener('cancel',e=>{if(!canLeavePrices())e.preventDefault();else adminUnsaved=false;});
 document.querySelectorAll('dialog').forEach(dialog=>dialog.addEventListener('close',()=>{if(dialog.contains($('toast'))){$('toast').classList.add('hidden');document.body.append($('toast'));}}));
 function openCheckout() {
+ if(!canOpenCheckout()){if($('previewDialog').open)$('previewDialog').close();goStep(firstIncompleteStep());notify('Сначала завершите выбор формы, начинки и дизайна, затем откройте детали.');return;}
+ if($('previewDialog').open)$('previewDialog').close();
  if(state.delivery==='courier'&&!state.address.trim()){goStep(3);notify('Укажите адрес доставки.');$('deliveryAddress').focus();return;}
  checkoutDraft={selection:clone({...state,fillingSnapshot:FILLINGS.find(f=>f.id===state.filling),reference:state.reference?{name:state.reference.name}:null}),quote:clone(calculate(state,prices))};
  $('checkoutSummary').textContent=`${number(state.weight)} кг · ${FILLINGS.find(f=>f.id===state.filling).name} · ${DESIGNS.find(d=>d.id===state.design).name}. Предварительно ${money(checkoutDraft.quote.total)}.`;
- const date=$('orderForm').elements.date;date.min=minOrderDate();$('orderError').textContent='';$('checkoutDialog').showModal();
+ const date=$('orderForm').elements.date;date.min=minOrderDate();$('orderError').textContent='';$('checkoutDialog').showModal();$('checkoutDialog').scrollTop=0;
 }
 $('orderForm').addEventListener('submit',e=>{
  e.preventDefault();const form=e.currentTarget;if(!form.reportValidity()||!checkoutDraft)return;
+ if(!canOpenCheckout()){$('orderError').textContent='Завершите выбор торта перед оформлением.';return;}
  const values=Object.fromEntries(new FormData(form));const digits=values.phone.replace(/\D/g,'');
  if(!values.name.trim()){ $('orderError').textContent='Укажите ваше имя.';return; }
  if(digits.length<10||digits.length>15){$('orderError').textContent='Проверьте телефон: нужно от 10 до 15 цифр.';form.elements.phone.focus();return;}
@@ -236,13 +302,19 @@ function validateFilling(data,id) {
  if(!/^#[0-9a-f]{6}$/i.test(data.biscuit)||!/^#[0-9a-f]{6}$/i.test(data.cream))throw Error('Выберите корректные цвета бисквита и крема.');
  return {id,name,description,allergens,biscuit:data.biscuit,cream:data.cream};
 }
+function reconcileFillingSelection(force=false){
+ if(!FILLINGS.some(f=>f.id===state.filling)){state.filling=FILLINGS[0].id;force=true;}
+ if(force){stepChoices.filling=false;checkoutDraft=null;}
+ state.step=Math.min(state.step,firstIncompleteStep());
+}
 function removeFilling(id) {
  if(FILLINGS.length<=1)throw Error('Нельзя удалить последнюю начинку. Сначала добавьте новую.');
  const index=FILLINGS.findIndex(f=>f.id===id);if(index===-1)throw Error('Начинка уже удалена.');
+ const wasSelected=state.filling===id;
  FILLINGS.splice(index,1);delete prices.fillings[id];
- if(state.filling===id)state.filling=FILLINGS[0].id;
+ reconcileFillingSelection(wasSelected);
 }
-$('openAdmin').onclick=()=>{editingFillingId=null;renderAdmin();$('adminDialog').showModal();};
+$('openAdmin').onclick=()=>{editingFillingId=null;renderAdmin();$('adminDialog').showModal();$('adminDialog').scrollTop=0;};
 function canLeavePrices() {return !adminUnsaved||confirm('Есть неприменённые изменения в форме. Отменить их?');}
 $('pricesTab').onclick=()=>{if(canLeavePrices()){adminTab='prices';renderAdmin();}};
 $('fillingsTab').onclick=()=>{if(canLeavePrices()){adminTab='fillings';editingFillingId=null;renderAdmin();}};
@@ -279,7 +351,7 @@ $('adminContent').addEventListener('submit',e=>{
    if(FILLINGS.some(f=>f.id!==id&&f.name.toLocaleLowerCase('ru-RU')===clean.name.toLocaleLowerCase('ru-RU')))throw Error('Начинка с таким названием уже есть.');
    const index=FILLINGS.findIndex(f=>f.id===id);
    if(index===-1)FILLINGS.push(clean);else FILLINGS[index]=clean;
-   prices.fillings[id]=data.price;adminUnsaved=false;editingFillingId=null;
+   prices.fillings[id]=data.price;if(index!==-1&&state.filling===id)reconcileFillingSelection(true);adminUnsaved=false;editingFillingId=null;
    renderAdmin();renderBuilder();notify('Начинка применена в этой сессии. После перезапуска изменения сбросятся.');
   }catch(error){$('fillingError').textContent=error.message;}
   return;
@@ -300,7 +372,7 @@ $('adminContent').addEventListener('click',e=>{
   if(!canLeavePrices())return;
   const id=b.dataset.deleteFilling,f=FILLINGS.find(item=>item.id===id);if(!f)return;
   if(!confirm('Удалить начинку «'+f.name+'»? Старые заявки сохранят её название и стоимость.'))return;
-  try{const wasSelected=state.filling===id;removeFilling(id);editingFillingId=null;adminUnsaved=false;renderAdmin();renderBuilder();notify(wasSelected?'Начинка удалена. В конструкторе выбрана другая, цена пересчитана.':'Начинка удалена из конструктора.');}catch(error){notify(error.message);}return;
+  try{const wasSelected=state.filling===id;removeFilling(id);editingFillingId=null;adminUnsaved=false;renderAdmin();renderBuilder();notify(wasSelected?'Начинка удалена. Выберите начинку заново, чтобы продолжить.':'Начинка удалена из конструктора.');}catch(error){notify(error.message);}return;
  }
  if(b.id==='exportPrices'){
   if(adminUnsaved){notify('Сначала нажмите «Применить цены».');return;}
@@ -309,7 +381,7 @@ $('adminContent').addEventListener('click',e=>{
  if(b.id==='importPrices'){
   if(!canLeavePrices())return;$('pricesFile').click();
  }
- if(b.id==='resetPrices'&&confirm('Вернуть тестовые цены и начинки? Текущий каталог будет сброшен.')){prices=clone(DEFAULT_PRICES);FILLINGS=clone(DEFAULT_FILLINGS);if(!FILLINGS.some(f=>f.id===state.filling))state.filling=FILLINGS[0].id;editingFillingId=null;renderAdmin();renderBuilder();notify('Тестовые цены и начинки восстановлены.');}
+ if(b.id==='resetPrices'&&confirm('Вернуть тестовые цены и начинки? Текущий каталог будет сброшен.')){prices=clone(DEFAULT_PRICES);FILLINGS=clone(DEFAULT_FILLINGS);reconcileFillingSelection(true);editingFillingId=null;renderAdmin();renderBuilder();notify('Тестовые цены и начинки восстановлены.');}
  if(b.id==='exportOrders')download('danatela-orders-private.json',JSON.stringify({version:1,exportedAt:new Date().toISOString(),orders},null,2));
  if(b.dataset.orderMessage){lastOrder=orders.find(o=>o.id===b.dataset.orderMessage);$('vkMessage').textContent=buildMessage(lastOrder);$('vkDialog').showModal();}
 });
@@ -317,7 +389,7 @@ $('adminContent').addEventListener('change',async e=>{
  if(e.target.dataset.status){const order=orders.find(o=>o.id===e.target.dataset.status);const allowed=['Новая','Обсуждаем','Согласована','Завершена','Отменена'];if(order&&allowed.includes(e.target.value)){order.status=e.target.value;notify('Статус обновлён только в этой вкладке.');}}
  if(e.target.id==='pricesFile'){
   const file=e.target.files[0];if(!file)return;
-  try {if(file.size>1024*1024)throw Error('Файл слишком большой. Загрузите экспорт каталога до 1 МБ.');const data=JSON.parse(await file.text());const checked=validateBundle(data);prices=checked.prices;FILLINGS=checked.fillings;if(!FILLINGS.some(f=>f.id===state.filling))state.filling=FILLINGS[0].id;editingFillingId=null;renderAdmin();renderBuilder();notify('Каталог и цены загружены в эту сессию.');}
+  try {if(file.size>1024*1024)throw Error('Файл слишком большой. Загрузите экспорт каталога до 1 МБ.');const data=JSON.parse(await file.text());const checked=validateBundle(data);prices=checked.prices;FILLINGS=checked.fillings;reconcileFillingSelection(true);editingFillingId=null;renderAdmin();renderBuilder();notify('Каталог и цены загружены в эту сессию.');}
   catch(err){const area=$('pricesError');if(area)area.textContent='Не удалось загрузить цены: '+err.message;}
   finally {e.target.value='';}
  }
@@ -340,7 +412,7 @@ function runSelfChecks() {
  check('Неверные цены отклоняются',rejected===7);
  check('Безопасный вывод текста',escapeHtml('<img src=x onerror="alert(1)">')==='&lt;img src=x onerror=&quot;alert(1)&quot;&gt;');
  check('Цена зафиксирована в заявке',(()=>{const q=clone(calculate(fixture,DEFAULT_PRICES));const changed=clone(DEFAULT_PRICES);changed.base=9999;calculate(fixture,changed);return q.total===4700;})());
- const oldFillings=clone(FILLINGS),oldPrices=clone(prices),oldSelection=clone(state);
+ const oldFillings=clone(FILLINGS),oldPrices=clone(prices),oldSelection=clone(state),oldChoices=clone(stepChoices);
  try{
   const data={name:'Лимон — меренга',description:'Лимонный бисквит и крем',allergens:'Пшеница, яйца, молоко',biscuit:'#e7ca94',cream:'#fff0a0',price:400};
   const custom=validateFilling(data,'custom_test');FILLINGS.push(custom);prices.fillings[custom.id]=400;
@@ -353,12 +425,26 @@ function runSelfChecks() {
   while(FILLINGS.length>1)removeFilling(FILLINGS[0].id);
   let blocked=false;try{removeFilling(FILLINGS[0].id);}catch{blocked=true;}check('Последнюю начинку нельзя удалить',blocked&&FILLINGS.length===1);
   let colorRejected=false;try{validateFilling({...data,cream:'red;display:none'},'custom_bad');}catch{colorRejected=true;}check('Некорректные цвета отклоняются',colorRejected);
- }finally{FILLINGS=oldFillings;prices=oldPrices;state=oldSelection;}
+ }finally{FILLINGS=oldFillings;prices=oldPrices;state=clone(oldSelection);stepChoices=clone(oldChoices);}
+ try{
+  stepChoices={shape:false,filling:false,design:false};state.step=0;
+  check('До выбора формы следующие шаги закрыты',!stepIsUnlocked(1)&&!stepIsUnlocked(3)&&!canOpenCheckout());
+  stepChoices.shape=true;
+  check('После формы доступна только начинка',stepIsUnlocked(1)&&!stepIsUnlocked(2));
+  stepChoices.filling=true;
+  check('После начинки доступен только дизайн',stepIsUnlocked(2)&&!stepIsUnlocked(3));
+  stepChoices.design=true;
+  check('Детали открываются после дизайна',stepIsUnlocked(3));
+  state.step=2;
+  check('Оформление не обходит просмотр деталей',!canOpenCheckout());
+  state.step=3;
+  check('Оформление доступно после всех шагов',canOpenCheckout());
+ }finally{state=oldSelection;stepChoices=oldChoices;}
  window.DanatelaChecks=Object.freeze({passed:results.length,checks:Object.freeze(results)});
  console.info('Danatela: '+results.length+' встроенных проверок пройдено.',results);
  return results;
 }
-try{runSelfChecks();renderBuilder();}catch(error){console.error(error);$('builderPanel').textContent='Не удалось запустить конструктор: '+error.message;document.querySelectorAll('#nextStep,#mobileNext,#checkout').forEach(b=>b.disabled=true);}
+try{runSelfChecks();renderBuilder();}catch(error){window.DanatelaStartupError=String(error.message||error);console.error(error);$('builderPanel').textContent='Не удалось запустить конструктор: '+window.DanatelaStartupError;document.querySelectorAll('#nextStep,#mobileNext,#checkout').forEach(b=>b.disabled=true);}
 
 </script>
 <script src="./pwa.js"></script>
